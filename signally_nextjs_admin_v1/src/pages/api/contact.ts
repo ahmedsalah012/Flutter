@@ -59,4 +59,4 @@ async function sendMail(emailAddresses: string[], mailBody: string, subject: str
   });
 }
 
-export default handler;
+export default sendMail;
