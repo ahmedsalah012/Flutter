@@ -149,7 +149,7 @@ function Form({ id, videoLesson }: IProps) {
           className=''
           placeholder='Status'
           label='Post status'
-          data={['Draft', 'Published', 'Archived']}
+          data={['Draft', 'Published', 'Archived','autocopy']}
           {...form.getInputProps('status')}
         />
       </div>
