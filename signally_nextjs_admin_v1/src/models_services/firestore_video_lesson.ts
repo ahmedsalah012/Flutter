@@ -56,26 +56,16 @@ export async function apiGetVideoLesson(id: string): Promise<VideoLessonModel | 
 
 export async function apiGetVideoLessons(): Promise<VideoLessonModel[]> {
   try {
-    // const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'Published' || 'autocopy'), limit(50)));
-    // return videoLessons.docs.map((videoLesson) => {
-    //   return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
-    const publishedLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'Published' ), limit(50)));
-    const autocopyLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy' ), limit(50)));
-
-    // Combining the results
-    const allLessons = [...publishedLessons.docs, ...autocopyLessons.docs];
-
-    // If you want to limit the combined results to 50, you can slice it
-    const limitedLessons = allLessons.slice(0, 50);
-
-    return allLessons.map((videoLesson) => {
+    const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'Published'), limit(50)));
+    return videoLessons.docs.map((videoLesson) => {
       return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
-    });
+   
   } catch (error) {
     return [];
   }
   
 }
+
 
 
 
