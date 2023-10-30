@@ -6,6 +6,7 @@ export class DashboardModel {
 
   @Expose() totalUsers: number = 0;
   @Expose() totalVideoLessons: number = 0;
+  @Expose() totalVideoLessonsAutocopy: number = 0;
   @Expose() totalAnnouncements: number = 0;
   @Expose() totalSignalsForexOpen: number = 0;
   @Expose() totalSignalsForexClosed: number = 0;
