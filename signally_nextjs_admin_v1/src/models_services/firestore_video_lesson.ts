@@ -55,14 +55,14 @@ export async function apiGetVideoLesson(id: string): Promise<VideoLessonModel | 
 }
 
 export async function apiGetVideoLessons(): Promise<VideoLessonModel[]> {
-  try {
-    const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'Published'), limit(50)));
-    return videoLessons.docs.map((videoLesson) => {
-      return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
-    });
-  } catch (error) {
-    return [];
-  }
+  // try {
+  //   const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'Published'), limit(50)));
+  //   return videoLessons.docs.map((videoLesson) => {
+  //     return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
+  //   });
+  // } catch (error) {
+  //   return [];
+  // }
    try {
     const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'), limit(50)));
     return videoLessons.docs.map((videoLesson) => {
