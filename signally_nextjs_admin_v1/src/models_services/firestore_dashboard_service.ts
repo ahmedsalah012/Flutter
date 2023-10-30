@@ -12,6 +12,10 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
     const videoLessonsSnapshot = await getCountFromServer(collVideoLessons);
     const totalVideoLessons = videoLessonsSnapshot.data().count;
 
+     const collVideoLessonsAutocopy = query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'));
+    const videoLessonsSnapshotAutocopy = await getCountFromServer(collVideoLessonsAutocopy);
+    const totalVideoLessonsAutocopy = videoLessonsSnapshotAutocopy.data().count;
+
     const collAnnouncements = query(collection(firestoreClient, 'announcements'));
     const announcementsSnapshot = await getCountFromServer(collAnnouncements);
     const totalAnnouncements = announcementsSnapshot.data().count;
@@ -47,6 +51,7 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
     return DashboardModel.fromJson({
       totalUsers,
       totalVideoLessons,
+      totalVideoLessonsAutocopy,
       totalAnnouncements,
       totalSignalsForexOpen,
       totalSignalsForexClosed,
