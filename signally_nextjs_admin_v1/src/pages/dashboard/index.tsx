@@ -46,7 +46,7 @@ export default function DashboardPage() {
               <DashboardCard title='Posts:' value={dashboard.totalPosts} icon='material-symbols:local-post-office-outline' />
               <DashboardCard title='Announcements:' value={dashboard.totalAnnouncements} icon='tabler:info-square-rounded' />
               <DashboardCard title='Videos:' value={dashboard.totalVideoLessons} icon='bxs:videos' />
-               <DashboardCard title='Videos_autocopy:' value={dashboard.totalVideoLessons} icon='bxs:videos' />
+               <DashboardCard title='Videos_autocopy:' value={dashboard.totalVideoLessonsAutocopy} icon='bxs:videos' />
             </div>
             <Text className='mt-5 text-lg font-semibold leading-10 cursor-pointer'>Open Signals</Text>
             <div className='grid grid-cols-1 mt-0 md:grid-cols-3 gap-x-3 gap-y-3'>
