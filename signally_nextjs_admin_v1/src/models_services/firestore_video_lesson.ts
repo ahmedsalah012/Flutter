@@ -63,6 +63,14 @@ export async function apiGetVideoLessons(): Promise<VideoLessonModel[]> {
   } catch (error) {
     return [];
   }
+   try {
+    const videoLessons = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'), limit(50)));
+    return videoLessons.docs.map((videoLesson) => {
+      return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
+    });
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function apiDeleteVideoLesson(id: string): Promise<boolean> {
