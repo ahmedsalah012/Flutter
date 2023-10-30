@@ -68,7 +68,7 @@ export async function apiGetVideoLessons(): Promise<VideoLessonModel[]> {
     // If you want to limit the combined results to 50, you can slice it
     const limitedLessons = allLessons.slice(0, 50);
 
-    return limitedLessons.map((videoLesson) => {
+    return allLessons.map((videoLesson) => {
       return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
     });
   } catch (error) {
