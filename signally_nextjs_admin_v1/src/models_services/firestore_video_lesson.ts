@@ -16,6 +16,7 @@ export async function apiCreateVideoLesson(x: VideoLessonModel): Promise<boolean
 
     await addDoc(collection(firestoreClient, 'videoLessons'), { ...videoLession });
     await apiAggregateVideoLessons();
+    await apiAggregateVideoLessonsCopy();
 
     return true;
   } catch (error: any) {
@@ -34,7 +35,7 @@ export async function apiUpdateVideoLesson(id: string, x: VideoLessonModel): Pro
 
     await updateDoc(doc(firestoreClient, 'videoLessons', id), { ...videoLesson });
     await apiAggregateVideoLessons();
-
+    await apiAggregateVideoLessonsCopy();
     return true;
   } catch (error: any) {
     throw new Error(error.message);
@@ -67,6 +68,19 @@ export async function apiGetVideoLessons(): Promise<VideoLessonModel[]> {
 }
 
 
+export async function apiGetVideoLessonsCopy(): Promise<VideoLessonModel[]> {
+  try {
+    const videoLessonsCopy = await getDocs(query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'), limit(50)));
+    return videoLessonsCopy.docs.map((videoLesson) => {
+      return VideoLessonModel.fromJson({ ...videoLesson.data(), id: videoLesson.id });
+   
+  } catch (error) {
+    return [];
+  }
+  
+}
+
+
 
 
 export async function apiDeleteVideoLesson(id: string): Promise<boolean> {
@@ -78,7 +92,7 @@ export async function apiDeleteVideoLesson(id: string): Promise<boolean> {
 
     await deleteDoc(doc(firestoreClient, 'videoLessons', id));
     await apiAggregateVideoLessons();
-
+    await apiAggregateVideoLessonsCopy();
     return true;
   } catch (error: any) {
     throw new Error(error.message);
@@ -106,3 +120,30 @@ export async function apiAggregateVideoLessons(): Promise<boolean> {
     throw new Error(error.message);
   }
 }
+
+
+
+export async function apiAggregateVideoLessonsCopy(): Promise<boolean> {
+  try {
+    const signals = await apiGetVideoLessonsCopy();
+
+    const data = signals.map((signal) => {
+      return VideoLessonModel.toJson(signal);
+    });
+
+    // sort by timestampCreated descending
+    data.sort((a, b) => {
+      return b.timestampCreated!.getTime() - a.timestampCreated!.getTime();
+    });
+
+    await setDoc(doc(firestoreClient, 'videoLessonsAggr', 'videoLessons'), { data, timestampUpdated: serverTimestamp() });
+
+    return true;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+}
+
+
+
