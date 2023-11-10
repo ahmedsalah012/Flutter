@@ -9,6 +9,7 @@ import { NavbarAdmin } from './_navbar_admin';
 
 type Props = {
   children: React.ReactNode;
+  // children: React.ReactNode;
 };
 
 export default function LayoutAdmin({ children }: Props) {
