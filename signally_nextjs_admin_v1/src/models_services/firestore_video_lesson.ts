@@ -16,7 +16,6 @@ export async function apiCreateVideoLesson(x: VideoLessonModel): Promise<boolean
 
     await addDoc(collection(firestoreClient, 'videoLessons'), { ...videoLession });
     await apiAggregateVideoLessons();
-  //  await apiAggregateVideoLessonsCopy();
 
     return true;
   } catch (error: any) {
