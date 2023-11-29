@@ -15,8 +15,8 @@ export async function apiCreateVideoLesson(x: VideoLessonModel): Promise<boolean
     if (!user.isSuperAdmin && !user.isAdmin) throw new Error('You are not authorized to update videos.');
 
     await addDoc(collection(firestoreClient, 'videoLessons'), { ...videoLession });
- //   await apiAggregateVideoLessons();
-    await apiAggregateVideoLessonsCopy();
+    await apiAggregateVideoLessons();
+  //  await apiAggregateVideoLessonsCopy();
 
     return true;
   } catch (error: any) {
