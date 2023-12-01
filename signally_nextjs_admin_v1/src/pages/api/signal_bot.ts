@@ -35,9 +35,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       };
       await firestoreAdmin.collection('signalsForex').add(newSignal);
 
-      res.status(200).json({ message: 'Signal added to signalsForex' });
+  //    res.status(200).json({ message: 'Signal added to signalsForex' });
     } catch (error: any) {
-      res.status(500).json({ message: error.message });
+  //    res.status(500).json({ message: error.message });
     }
   } else {
  //   res.status(405).json({ error: 'Method not allowed' });
