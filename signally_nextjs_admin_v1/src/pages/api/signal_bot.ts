@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import { authAdmin, firestoreAdmin } from '../../_firebase/firebase_admin';
-import { withAuth } from '../../_firebase/firebase_admin_auth';
+// import { withAuth } from '../../_firebase/firebase_admin_auth';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const userId = "YMUWk4jtdafw9WirZ60qPKxwjJL2";
@@ -40,8 +40,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(500).json({ message: error.message });
     }
   } else {
-    res.status(405).json({ error: 'Method not allowed' });
+ //   res.status(405).json({ error: 'Method not allowed' });
   }
 }
 
-export default withAuth(handler);
+// export default withAuth(handler);
