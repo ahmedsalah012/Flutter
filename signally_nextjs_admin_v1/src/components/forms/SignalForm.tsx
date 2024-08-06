@@ -23,7 +23,7 @@ import { getBoolFromString, getStringFromBool } from '../../utils/get_bool_strin
 import { useFirestoreStoreAdmin } from '../../models_store/firestore_store_admin';
 import { calcentrytime } from '../../utils/calc_entrytime';
 
-type markets = 'forex' | 'crypto' | 'stocks' | 'commodity';
+type markets = 'forex' | 'crypto' | 'stocks' | 'global' | 'commodity';
 
 interface IProps {
   id?: string;
@@ -66,6 +66,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
     if (market === 'forex') return symbolAggr.forex;
     if (market === 'crypto') return symbolAggr.crypto;
     if (market === 'stocks') return symbolAggr.stocks;
+    if (market === 'global') return symbolAggr.global;
+
     return [];
   }
 
@@ -82,7 +84,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
     //
     entryPrice: Yup.number().required('Required'),
     entryDateTime: Yup.date().required('Required'),
-   // timeentryDateTime: Yup.date().required('Required'),
+    // timeentryDateTime: Yup.date().required('Required'),
 
     //
     stopLoss: Yup.number().required('Required'),
@@ -114,7 +116,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
       symbol: signal?.symbol ?? '',
       comment: signal?.comment ?? '',
       forecast: signal?.forecast ?? '',
-    //  entrytime: signal?.getTimeEntry ?? null,
+      //  entrytime: signal?.getTimeEntry ?? null,
       // TimeEntryDate: signal?.getTimeEntryDate ?? null,
       // TimeEntryTime: signal?.getTimeEntryTime ?? null,
       timeentryDateTime: signal?.timeentryDateTime ?? new Date(),
@@ -182,8 +184,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
       s.comment = form.values.comment;
       s.forecast = form.values.forecast;
       s.payout = form.values.payout;
-      s.timeentryDateTime = calcentrytime( form.values.entryDateTime);
-      
+      s.timeentryDateTime = calcentrytime(form.values.entryDateTime);
+
       s.analysisImage = form.values.analysisImage;
       s.analysisText = form.values.analysisText;
       //
@@ -229,6 +231,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
       if (market == 'crypto') router.push('/signals-crypto');
       if (market == 'forex') router.push('/signals-forex');
       if (market == 'stocks') router.push('/signals-stocks');
+      if (market == 'global') router.push('/signals-global');
+
 
       showNotification({ title: 'Success', message: 'Signal was created', autoClose: 6000 });
     } catch (error: any) {
@@ -481,7 +485,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
             console.log(form.values.takeProfit2);
           }}
           value={form.values.takeProfit2}
-         // error={getSignalFormErrorTakeProfit(form.values.entryType, form.values.entryPrice, form.values.takeProfit2) || form.errors.takeProfit2}
+        // error={getSignalFormErrorTakeProfit(form.values.entryType, form.values.entryPrice, form.values.takeProfit2) || form.errors.takeProfit2}
         />
 
         <TextInput
@@ -520,7 +524,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
           onChange={(e: any) => {
             form.setFieldValue('takeProfit3', e.target.value == '' ? null : e.target.value);
           }}
-         // error={getSignalFormErrorTakeProfit(form.values.entryType, form.values.entryPrice, form.values.takeProfit3) || form.errors.takeProfit3}
+          // error={getSignalFormErrorTakeProfit(form.values.entryType, form.values.entryPrice, form.values.takeProfit3) || form.errors.takeProfit3}
           value={form.values.takeProfit3}
         />
         <TextInput
@@ -568,8 +572,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
       <div className='mb-5'>
         <Textarea label='Analysis' placeholder='Analysis' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('analysisText')} />
         {/* <Textarea label='entrytime' placeholder='entrytime' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('entrytime')}/> */}
-        <Textarea label='forecast' placeholder='forecast' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('forecast')}/>
-        <Textarea label='payout' placeholder='payout' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('payout')}/>
+        <Textarea label='forecast' placeholder='forecast' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('forecast')} />
+        <Textarea label='payout' placeholder='payout' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('payout')} />
         <Textarea label='Comment' placeholder='Result' minRows={4} maxLength={140} className='mt-4' {...form.getInputProps('comment')} />
       </div>
 
