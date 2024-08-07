@@ -180,6 +180,8 @@ export async function apiAggregateSignals({ dbPath }: { dbPath: string }): Promi
     let docPath = 'crypto';
     if (dbPath === 'signalsForex') docPath = 'forex';
     if (dbPath === 'signalsStocks') docPath = 'stocks';
+    if (dbPath === 'signalsGlobal') docPath = 'global';
+
 
     const hasData = data.length > 0;
     await setDoc(doc(firestoreClient, 'signalsAggrOpen', docPath), { data, hasData, timestampUpdated: serverTimestamp() }, { merge: true });
@@ -221,6 +223,8 @@ export async function apiSignalAggrPerfromance({ dbPath }: { dbPath: string }): 
     let docPath = 'crypto';
     if (dbPath === 'signalsForex') docPath = 'forex';
     if (dbPath === 'signalsStocks') docPath = 'stocks';
+    if (dbPath === 'signalsGlobal') docPath = 'global';
+
 
     await setDoc(
       doc(firestoreClient, 'signalsAggrOpen', docPath),
