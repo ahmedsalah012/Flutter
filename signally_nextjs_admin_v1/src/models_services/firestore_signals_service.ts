@@ -178,13 +178,17 @@ export async function apiAggregateSignals({ dbPath }: { dbPath: string }): Promi
     });
 
     let docPath = 'crypto';
+    let collectionPath = 'signalsAggrOpen';
     if (dbPath === 'signalsForex') docPath = 'forex';
     if (dbPath === 'signalsStocks') docPath = 'stocks';
-    if (dbPath === 'signalsGlobal') docPath = 'global';
+    if (dbPath === 'signalsGlobal') {
+      docPath = 'global';
+      collectionPath = 'signalsAggrOpen2';
+    }
 
 
     const hasData = data.length > 0;
-    await setDoc(doc(firestoreClient, 'signalsAggrOpen', docPath), { data, hasData, timestampUpdated: serverTimestamp() }, { merge: true });
+    await setDoc(doc(firestoreClient, collectionPath, docPath), { data, hasData, timestampUpdated: serverTimestamp() }, { merge: true });
 
     return true;
   } catch (error: any) {
@@ -221,13 +225,17 @@ export async function apiSignalAggrPerfromance({ dbPath }: { dbPath: string }): 
     const performance30Days = { trades: trades30Days, profitPercentPerTrade: 0, wins: wins30Days, winRate: winRate30Days };
 
     let docPath = 'crypto';
+    let collectionPath = 'signalsAggrOpen';
     if (dbPath === 'signalsForex') docPath = 'forex';
     if (dbPath === 'signalsStocks') docPath = 'stocks';
-    if (dbPath === 'signalsGlobal') docPath = 'global';
+    if (dbPath === 'signalsGlobal') {
+      docPath = 'global';
+      collectionPath = 'signalsAggrOpen2';
+    }
 
 
     await setDoc(
-      doc(firestoreClient, 'signalsAggrOpen', docPath),
+      doc(firestoreClient, collectionPath, docPath),
       { performance7Days, performance14Days, performance30Days, timestampUpdated: serverTimestamp() },
       { merge: true }
     );
