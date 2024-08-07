@@ -28,10 +28,15 @@ type State = {
   signalsCryptoOpen: SignalModel[];
   signalsForexOpen: SignalModel[];
   signalsStocksOpen: SignalModel[];
+  signalsGlobalOpen: SignalModel[];
+
+
 
   signalsCryptoClosed: SignalModel[];
   signalsForexClosed: SignalModel[];
   signalsStocksClosed: SignalModel[];
+  signalsGlobalClosed: SignalModel[];
+
 
   announcements: AnnouncementModel[];
   notifications: NotificationModel[];
@@ -48,10 +53,14 @@ type State = {
   streamSignalsCryptoOpen: () => void;
   streamSignalsForexOpen: () => void;
   streamSignalsStocksOpen: () => void;
+  streamSignalsGlobalOpen: () => void;
+
 
   streamSignalsCryptoClosed: () => void;
   streamSignalsForexClosed: () => void;
   streamSignalsStocksClosed: () => void;
+  streamSignalsGlobalClosed: () => void;
+
 
   streamAnnouncements: () => void;
   streamNotifications: () => void;
@@ -85,10 +94,14 @@ export const useFirestoreStoreAdmin = create<State>((set, get) => ({
   signalsCryptoOpen: [],
   signalsForexOpen: [],
   signalsStocksOpen: [],
+  signalsGlobalOpen: [],
+
 
   signalsCryptoClosed: [],
   signalsForexClosed: [],
   signalsStocksClosed: [],
+  signalsGlobalClosed: [],
+
 
   announcements: [],
   notifications: [],
@@ -241,6 +254,40 @@ export const useFirestoreStoreAdmin = create<State>((set, get) => ({
     });
   },
 
+  streamSignalsGlobalOpen: () => {
+    const q = query(collection(firestoreClient, 'signalsGlobal'), where('isClosed', '==', false), orderBy('timestampCreated', 'desc'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const x = querySnapshot.docs.map((doc) => {
+        return SignalModel.fromJson({ ...doc.data(), id: doc.id });
+      });
+
+      set((state) => {
+        return { ...state, signalsGlobalOpen: x };
+      });
+    });
+
+    set((state) => {
+      return { ...state, subscriptions: { ...state.subscriptions, signalsGlobalOpen: unsubscribe } };
+    });
+  },
+
+  streamSignalsGlobalClosed: () => {
+    const q = query(collection(firestoreClient, 'signalsGlobal'), where('isClosed', '==', true), orderBy('timestampCreated', 'desc'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const x = querySnapshot.docs.map((doc) => {
+        return SignalModel.fromJson({ ...doc.data(), id: doc.id });
+      });
+
+      set((state) => {
+        return { ...state, signalsGlobalClosed: x };
+      });
+    });
+
+    set((state) => {
+      return { ...state, subscriptions: { ...state.subscriptions, signalsGlobalClosed: unsubscribe } };
+    });
+  },
+
   streamAnnouncements: () => {
     const q = query(collection(firestoreClient, 'announcements'), orderBy('timestampCreated', 'desc'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -360,10 +407,14 @@ export const useFirestoreStoreAdmin = create<State>((set, get) => ({
           get().streamSignalsCryptoOpen();
           get().streamSignalsForexOpen();
           get().streamSignalsStocksOpen();
+          get().streamSignalsGlobalOpen();
+
 
           get().streamSignalsCryptoClosed();
           get().streamSignalsForexClosed();
           get().streamSignalsStocksClosed();
+          get().streamSignalsGlobalClosed();
+
 
           get().streamAnnouncements();
           get().streamNotifications();
