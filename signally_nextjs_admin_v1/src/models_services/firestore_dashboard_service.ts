@@ -44,6 +44,14 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
     const signalsStocksSnapshotClosed = await getCountFromServer(collSignalsStocksClosed);
     const totalSignalsStocksClosed = signalsStocksSnapshotClosed.data().count;
 
+    const collSignalsGlobalOpen = query(collection(firestoreClient, 'signalsGlobal'), where('isClosed', '==', false));
+    const signalsGlobalSnapshotOpen = await getCountFromServer(collSignalsGlobalOpen);
+    const totalSignalsGlobalOpen = signalsGlobalSnapshotOpen.data().count;
+
+    const collSignalsGlobalClosed = query(collection(firestoreClient, 'signalsGlobal'), where('isClosed', '==', true));
+    const signalsGlobalSnapshotClosed = await getCountFromServer(collSignalsGlobalClosed);
+    const totalSignalsGlobalClosed = signalsGlobalSnapshotClosed.data().count;
+
     const collPosts = query(collection(firestoreClient, 'posts'));
     const postsSnapshot = await getCountFromServer(collPosts);
     const totalPosts = postsSnapshot.data().count;
@@ -59,6 +67,8 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
       totalSignalsStocksClosed,
       totalSignalsCryptoOpen,
       totalSignalsCryptoClosed,
+      totalSignalsGlobalOpen,
+      totalSignalsGlobalClosed,
       totalPosts
     });
   } catch (error) {
