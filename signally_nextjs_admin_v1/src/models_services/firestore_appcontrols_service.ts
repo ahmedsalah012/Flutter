@@ -37,9 +37,17 @@ export async function apiUpdateAppControlsPublic(x: AppControlsPublicModel): Pro
       { merge: true }
     );
 
+    await setDoc(
+      doc(firestoreClient, 'signalsAggrOpen', 'global'),
+      { isEnabled: appControls.isEnabledGlobalSignals, sort: appControls.sortOrderGlobalSignals, name: appControls.headingNameGlobal },
+      { merge: true }
+    );
+
     await setDoc(doc(firestoreClient, 'newsAggr', 'crypto'), { isEnabled: appControls.isEnabledCryptoNews }, { merge: true });
     await setDoc(doc(firestoreClient, 'newsAggr', 'forex'), { isEnabled: appControls.isEnabledForexNews }, { merge: true });
     await setDoc(doc(firestoreClient, 'newsAggr', 'stocks'), { isEnabled: appControls.isEnabledStocksNews }, { merge: true });
+    await setDoc(doc(firestoreClient, 'newsAggr', 'global'), { isEnabled: appControls.isEnabledGlobalNews }, { merge: true });
+
 
     return true;
   } catch (error: any) {
