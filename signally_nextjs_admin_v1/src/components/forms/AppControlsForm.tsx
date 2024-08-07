@@ -98,7 +98,7 @@ function Form({ appInfo }: IProps) {
       headingNameCrypto: appInfo?.headingNameCrypto ?? 'Crypto',
       headingNameForex: appInfo?.headingNameForex ?? 'Forex',
       headingNameStocks: appInfo?.headingNameStocks ?? 'Stocks',
-      headingNameGlobal: appInfo?.headingNameStocks ?? 'Global Market'
+      headingNameGlobal: appInfo?.headingNameGlobal ?? 'Global Market'
 
     }
   });
@@ -283,6 +283,10 @@ function Form({ appInfo }: IProps) {
               label='Sort Order Global Market'
               {...form.getInputProps('sortOrderGlobalSignals')} />
 
+          </div>
+
+          <div className='grid md:grid-cols-3 gap-x-3'>
+            <TextInput className='w-full' placeholder='Heading Global Market' label='Heading Global Market' {...form.getInputProps('headingNameGlobal')} />
           </div>
 
 
