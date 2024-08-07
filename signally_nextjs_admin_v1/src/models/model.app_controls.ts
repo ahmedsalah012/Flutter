@@ -27,7 +27,7 @@ export class AppControlsPublicModel {
   @Expose() headingNameCrypto: string = 'Crypto';
   @Expose() headingNameForex: string = 'Forex';
   @Expose() headingNameStocks: string = 'Stocks';
-  @Expose() headingNameGlobal: string = 'Global';
+  @Expose() headingNameGlobal: string = 'Global Market';
   @Expose() apiHasAccess: boolean = false;
   @Expose() apiWebSocketUrl: string = '';
   @Expose() apiInfo: string = '';
