@@ -38,7 +38,7 @@ export async function apiUpdateAppControlsPublic(x: AppControlsPublicModel): Pro
     );
 
     await setDoc(
-      doc(firestoreClient, 'signalsAggrOpen', 'global'),
+      doc(firestoreClient, 'signalsAggrOpen2', 'global'),
       { isEnabled: appControls.isEnabledGlobalSignals, sort: appControls.sortOrderGlobalSignals, name: appControls.headingNameGlobal },
       { merge: true }
     );
