@@ -8,6 +8,8 @@ export class SymbolsAggr {
   @Expose() forex: Symbol[] = [];
   @Expose() crypto: Symbol[] = [];
   @Expose() stocks: Symbol[] = [];
+  @Expose() global: Symbol[] = [];
+
 
   static fromJson(json: any): SymbolsAggr {
     json = convertObjectDate(json);
