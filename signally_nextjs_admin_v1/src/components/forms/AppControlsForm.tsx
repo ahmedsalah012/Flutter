@@ -55,18 +55,22 @@ function Form({ appInfo }: IProps) {
     isEnableForexSignals: Yup.string().required('Required'),
     isEnableCryptoSignals: Yup.string().required('Required'),
     isEnableStocksSignals: Yup.string().required('Required'),
+    isEnableGlobalSignals: Yup.string().required('Required'),
     isEnableForexNews: Yup.string().required('Required'),
     isEnableCryptoNews: Yup.string().required('Required'),
     isEnableStocksNews: Yup.string().required('Required'),
+    isEnableGlobalNews: Yup.string().required('Required'),
     isEnableFreeSignalsBOT: Yup.string().required('Required'),
     isEnableUnderMaintanance: Yup.string().required('Required'),
     CurrentAppVersion: Yup.string().required('Required'),
     sortOrderForexSignals: Yup.number().required('Required'),
     sortOrderCryptoSignals: Yup.number().required('Required'),
     sortOrderStocksSignals: Yup.number().required('Required'),
+    sortOrderGlobalSignals: Yup.number().required('Required'),
     headingNameCrypto: Yup.string().required('Required'),
     headingNameForex: Yup.string().required('Required'),
-    headingNameStocks: Yup.string().required('Required')
+    headingNameStocks: Yup.string().required('Required'),
+    headingNameGlobal: Yup.string().required('Required')
   });
 
   const form = useForm({
@@ -108,9 +112,11 @@ function Form({ appInfo }: IProps) {
       s.isEnabledForexSignals = getBoolFromString(form.values.isEnableForexSignals);
       s.isEnabledCryptoSignals = getBoolFromString(form.values.isEnableCryptoSignals);
       s.isEnabledStocksSignals = getBoolFromString(form.values.isEnableStocksSignals);
+      s.isEnabledGlobalSignals = getBoolFromString(form.values.isEnableGlobalSignals);
       s.isEnabledForexNews = getBoolFromString(form.values.isEnableForexNews);
       s.isEnabledCryptoNews = getBoolFromString(form.values.isEnableCryptoNews);
       s.isEnabledStocksNews = getBoolFromString(form.values.isEnableStocksNews);
+      s.isEnabledGlobalNews = getBoolFromString(form.values.isEnableGlobalNews);
       s.isEnableFreeSignalsBOT = getBoolFromString(form.values.isEnableFreeSignalsBOT);
       s.isEnableUnderMaintanance = getBoolFromString(form.values.isEnableUnderMaintanance);
       s.CurrentAppVersion = form.values.CurrentAppVersion;
@@ -118,9 +124,12 @@ function Form({ appInfo }: IProps) {
       s.sortOrderForexSignals = Number(form.values.sortOrderForexSignals);
       s.sortOrderCryptoSignals = Number(form.values.sortOrderCryptoSignals);
       s.sortOrderStocksSignals = Number(form.values.sortOrderStocksSignals);
+      s.sortOrderGlobalSignals = Number(form.values.sortOrderGlobalSignals);
       s.headingNameCrypto = form.values.headingNameCrypto;
       s.headingNameForex = form.values.headingNameForex;
       s.headingNameStocks = form.values.headingNameStocks;
+      s.headingNameGlobal = form.values.headingNameGlobal;
+
 
       if (file) s.logoImage = await getFirebaseStorageDownloadUrl({ file: file! });
 
@@ -267,8 +276,8 @@ function Form({ appInfo }: IProps) {
               className='w-full'
               placeholder='Sort Order Global Market'
               label='Sort Order Global Market'
-              {...form.getInputProps('sortOrderGlobalSignals')}/>
-            
+              {...form.getInputProps('sortOrderGlobalSignals')} />
+
           </div>
 
 
@@ -310,6 +319,16 @@ function Form({ appInfo }: IProps) {
 
             <NativeSelect
               className='w-full'
+              placeholder='Show Global Market news'
+              label='Show Global Market news'
+              data={['Yes', 'No']}
+              onChange={(e: any) => form.setFieldValue('isEnableGlobalNews', e.target.value)}
+              value={form.values.isEnableGlobalNews}
+              error={form.errors.isEnableGlobalNews}
+            />
+
+            <NativeSelect
+              className='w-full'
               placeholder='Show Free Signals BOT'
               label='Show Free Signals BOT'
               data={['Yes', 'No']}
@@ -328,7 +347,7 @@ function Form({ appInfo }: IProps) {
               error={form.errors.isEnableUnderMaintanance}
             />
 
-<TextInput
+            <TextInput
               className='w-full'
               placeholder='Current App Version'
               label='Current App Version'
