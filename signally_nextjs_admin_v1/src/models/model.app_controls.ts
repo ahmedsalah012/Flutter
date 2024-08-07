@@ -10,9 +10,11 @@ export class AppControlsPublicModel {
   @Expose() isEnabledForexSignals: boolean = true;
   @Expose() isEnabledCryptoSignals: boolean = true;
   @Expose() isEnabledStocksSignals: boolean = true;
+  @Expose() isEnabledGlobalSignals: boolean = true;
   @Expose() isEnabledForexNews: boolean = true;
   @Expose() isEnabledCryptoNews: boolean = true;
   @Expose() isEnabledStocksNews: boolean = true;
+  @Expose() isEnabledGlobalNews: boolean = true;
   @Expose() isEnableFreeSignalsBOT: boolean = true;
   @Expose() isEnableUnderMaintanance: boolean = true;
   @Expose() CurrentAppVersion: string = '';
@@ -20,9 +22,12 @@ export class AppControlsPublicModel {
   @Expose() sortOrderCryptoSignals: number = 1;
   @Expose() sortOrderForexSignals: number = 2;
   @Expose() sortOrderStocksSignals: number = 3;
+  @Expose() sortOrderGlobalSignals: number = 4;
+
   @Expose() headingNameCrypto: string = 'Crypto';
   @Expose() headingNameForex: string = 'Forex';
   @Expose() headingNameStocks: string = 'Stocks';
+  @Expose() headingNameGlobal: string = 'Global';
   @Expose() apiHasAccess: boolean = false;
   @Expose() apiWebSocketUrl: string = '';
   @Expose() apiInfo: string = '';
@@ -42,6 +47,8 @@ export class AppControlsPublicModel {
   @Expose() apiEnableNewsCrypto: boolean = true;
   @Expose() apiEnableNewsForex: boolean = true;
   @Expose() apiEnableNewsStocks: boolean = true;
+  @Expose() apiEnableNewsGlobal: boolean = true;
+
 
   static fromJson(json: any): AppControlsPublicModel {
     return plainToInstance(AppControlsPublicModel, json, { exposeDefaultValues: true, excludeExtraneousValues: true });
