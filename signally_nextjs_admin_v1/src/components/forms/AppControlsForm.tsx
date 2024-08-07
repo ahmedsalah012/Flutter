@@ -250,6 +250,31 @@ function Form({ appInfo }: IProps) {
 
           <Divider className='my-8 border-red-400' />
 
+          <div className='grid md:grid-cols-3 gap-x-3'>
+            <NativeSelect
+              className='w-full'
+              placeholder='Enable Global Market'
+              label='Enable Global Market'
+              data={['Yes', 'No']}
+              onChange={(e: any) => form.setFieldValue('isEnableGlobalSignals', e.target.value)}
+              value={form.values.isEnableCryptoSignals}
+              error={form.errors.isEnableCryptoSignals} />
+
+          </div>
+
+          <div className='grid md:grid-cols-3 gap-x-3'>
+            <TextInput
+              className='w-full'
+              placeholder='Sort Order Global Market'
+              label='Sort Order Global Market'
+              {...form.getInputProps('sortOrderGlobalSignals')}/>
+            
+          </div>
+
+
+
+          <Divider className='my-8 border-red-400' />
+
           <Text className='mb-5 text-2xl italic font-bold'>Api Access Specify Settings</Text>
 
           <div className='grid md:grid-cols-3 gap-x-3'>
