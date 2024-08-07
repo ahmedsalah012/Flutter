@@ -83,18 +83,23 @@ function Form({ appInfo }: IProps) {
       isEnableForexSignals: getStringFromBool(appInfo?.isEnabledForexSignals ?? false),
       isEnableCryptoSignals: getStringFromBool(appInfo?.isEnabledCryptoSignals ?? false),
       isEnableStocksSignals: getStringFromBool(appInfo?.isEnabledStocksSignals ?? false),
+      isEnableGlobalSignals: getStringFromBool(appInfo?.isEnabledGlobalSignals ?? false),
       isEnableForexNews: getStringFromBool(appInfo?.isEnabledForexNews ?? false),
       isEnableCryptoNews: getStringFromBool(appInfo?.isEnabledCryptoNews ?? false),
       isEnableStocksNews: getStringFromBool(appInfo?.isEnabledStocksNews ?? false),
+      isEnableGlobalNews: getStringFromBool(appInfo?.isEnabledGlobalNews ?? false),
       isEnableFreeSignalsBOT: getStringFromBool(appInfo?.isEnableFreeSignalsBOT ?? false),
       isEnableUnderMaintanance: getStringFromBool(appInfo?.isEnableUnderMaintanance ?? false),
       CurrentAppVersion: appInfo?.CurrentAppVersion ?? '',
       sortOrderForexSignals: appInfo?.sortOrderForexSignals ?? 0,
       sortOrderCryptoSignals: appInfo?.sortOrderCryptoSignals ?? 0,
       sortOrderStocksSignals: appInfo?.sortOrderStocksSignals ?? 0,
+      sortOrderGlobalSignals: appInfo?.sortOrderGlobalSignals ?? 0,
       headingNameCrypto: appInfo?.headingNameCrypto ?? 'Crypto',
       headingNameForex: appInfo?.headingNameForex ?? 'Forex',
-      headingNameStocks: appInfo?.headingNameStocks ?? 'Stocks'
+      headingNameStocks: appInfo?.headingNameStocks ?? 'Stocks',
+      headingNameGlobal: appInfo?.headingNameStocks ?? 'Global Market'
+
     }
   });
 
