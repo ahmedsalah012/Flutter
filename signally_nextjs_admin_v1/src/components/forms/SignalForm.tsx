@@ -225,8 +225,10 @@ function Form({ id, signal, market, dbPath }: IProps) {
       console.log("handleSubmit - dbPath:", dbPath); // Add this line for logging
 
 
-      if (!signal) await apiCreateSignal({ signal: s, sendNotification, dbPath });
-
+      if (!signal) {
+        console.log("Creating signal:", s);
+        await apiCreateSignal({ signal: s, sendNotification, dbPath });
+      }
       if (signal && id) await apiUpdateSignal({ signal: s, sendNotification, dbPath, id, isClosed });
 
       setIsLoading(false);
