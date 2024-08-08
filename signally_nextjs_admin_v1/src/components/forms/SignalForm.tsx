@@ -14,8 +14,7 @@ import { getFirebaseStorageDownloadUrl } from '../../models_services/firebase_im
 import { apiCreateSignal, apiGetSignal, apiUpdateSignal } from '../../models_services/firestore_signals_service';
 import { getSignalFormErrorStopLoss, getSignalFormErrorTakeProfit } from '../../utils/calculate_signal_form_error';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { authClient, firestoreClient } from '../_firebase/firebase_client';
-
+import { authClient, firestoreClient } from '../../_firebase/firebase_client';
 import { calculateSignalPct } from '../../utils/calulate_signal_pct';
 import { calculateSignalPips } from '../../utils/calulate_signal_pips';
 import { calculatePctPips } from '../../utils/calulate_pct_pips';
