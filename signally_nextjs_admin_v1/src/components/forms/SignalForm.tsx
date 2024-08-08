@@ -223,7 +223,6 @@ function Form({ id, signal, market, dbPath }: IProps) {
       if (file) s.analysisImage = await getFirebaseStorageDownloadUrl({ file: file! });
 
       if (!signal) await apiCreateSignal({ signal: s, sendNotification, dbPath });
-
       if (signal && id) await apiUpdateSignal({ signal: s, sendNotification, dbPath, id, isClosed });
 
       setIsLoading(false);
@@ -235,9 +234,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
       if (market == 'global') router.push('/signals-global');
 
 
-      // showNotification({ title: 'Success', message: 'Signal was created', autoClose: 6000 });
-      showNotification({ title: 'Debug Info', message: `dbPath: ${dbPath}`, autoClose: 10000 });
-
+      showNotification({ title: 'Success', message: 'Signal was created', autoClose: 6000 });
     } catch (error: any) {
       console.log('error', error);
       setIsLoading(false);
