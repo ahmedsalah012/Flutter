@@ -44,6 +44,12 @@ export function NavbarAdmin({ isOpen }: Props) {
 
         <Divider className='my-3 border-gray-200 dark:border-[#373A40]' />
 
+        <NavbarLink link='/signals-otc' title='Signals: OTC Market' iconifyData='akar-icons:edit' />
+        <NavbarLinkSub link='/signals-otc?isClosed=false' title='Open' />
+        <NavbarLinkSub link='/signals-otc?isClosed=true' title='Closed' />
+
+        <Divider className='my-3 border-gray-200 dark:border-[#373A40]' />
+
         <NavbarLink link='/users' title='Users' iconifyData='majesticons:users-line' />
         <NavbarLinkSub link='/users?access=superadmin' title='Super Admins' />
         <NavbarLinkSub link='/users?access=admin' title='Admins' />
