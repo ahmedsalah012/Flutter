@@ -16,6 +16,8 @@ export class DashboardModel {
   @Expose() totalSignalsCryptoClosed: number = 0;
   @Expose() totalSignalsGlobalOpen: number = 0;
   @Expose() totalSignalsGlobalClosed: number = 0;
+  @Expose() totalSignalsOTCOpen: number = 0;
+  @Expose() totalSignalsOTCClosed: number = 0;
   @Expose() totalPosts: number = 0;
 
   static fromJson(json: any): DashboardModel {
