@@ -185,6 +185,10 @@ export async function apiAggregateSignals({ dbPath }: { dbPath: string }): Promi
       docPath = 'global';
       collectionPath = 'signalsAggrOpen2';
     }
+    if (dbPath === 'signalsOTC') {
+      docPath = 'otc';
+      collectionPath = 'signalsAggrOpen2';
+    }
 
 
     const hasData = data.length > 0;
@@ -230,6 +234,10 @@ export async function apiSignalAggrPerfromance({ dbPath }: { dbPath: string }): 
     if (dbPath === 'signalsStocks') docPath = 'stocks';
     if (dbPath === 'signalsGlobal') {
       docPath = 'global';
+      collectionPath = 'signalsAggrOpen2';
+    }
+    if (dbPath === 'signalsOTC') {
+      docPath = 'otc';
       collectionPath = 'signalsAggrOpen2';
     }
 
