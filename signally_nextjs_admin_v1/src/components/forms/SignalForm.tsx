@@ -221,8 +221,14 @@ function Form({ id, signal, market, dbPath }: IProps) {
       s.timestampUpdated = new Date();
 
       if (file) s.analysisImage = await getFirebaseStorageDownloadUrl({ file: file! });
-
+      showNotification({ 
+        title: 'Debug Info', 
+        message: `dbPath: ${dbPath}`, 
+        autoClose: 10000 
+      });
       if (!signal) await apiCreateSignal({ signal: s, sendNotification, dbPath });
+
+
       if (signal && id) await apiUpdateSignal({ signal: s, sendNotification, dbPath, id, isClosed });
 
       setIsLoading(false);
