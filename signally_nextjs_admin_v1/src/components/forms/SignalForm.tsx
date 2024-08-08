@@ -23,7 +23,7 @@ import { getBoolFromString, getStringFromBool } from '../../utils/get_bool_strin
 import { useFirestoreStoreAdmin } from '../../models_store/firestore_store_admin';
 import { calcentrytime } from '../../utils/calc_entrytime';
 
-type markets = 'forex' | 'crypto' | 'stocks' | 'global' | 'commodity';
+type markets = 'forex' | 'crypto' | 'stocks' | 'global' | 'otc' | 'commodity';
 
 interface IProps {
   id?: string;
@@ -67,6 +67,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
     if (market === 'crypto') return symbolAggr.crypto;
     if (market === 'stocks') return symbolAggr.stocks;
     if (market === 'global') return symbolAggr.global;
+    if (market === 'otc') return symbolAggr.otc;
+
 
     return [];
   }
@@ -232,6 +234,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
       if (market == 'forex') router.push('/signals-forex');
       if (market == 'stocks') router.push('/signals-stocks');
       if (market == 'global') router.push('/signals-global');
+      if (market == 'otc') router.push('/signals-otc');
+
 
 
       showNotification({ title: 'Success', message: 'Signal was created', autoClose: 6000 });
