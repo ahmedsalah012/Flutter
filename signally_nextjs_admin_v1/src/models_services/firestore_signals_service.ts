@@ -234,6 +234,8 @@ export async function apiSignalAggrPerfromance({ dbPath }: { dbPath: string }): 
     }
 
 
+  
+
     await setDoc(
       doc(firestoreClient, collectionPath, docPath),
       { performance7Days, performance14Days, performance30Days, timestampUpdated: serverTimestamp() },
