@@ -9,6 +9,8 @@ export class SymbolsAggr {
   @Expose() crypto: Symbol[] = [];
   @Expose() stocks: Symbol[] = [];
   @Expose() global: Symbol[] = [];
+  @Expose() otc: Symbol[] = [];
+
 
 
   static fromJson(json: any): SymbolsAggr {
