@@ -13,8 +13,6 @@ import { useModals } from '@mantine/modals';
 import { getFirebaseStorageDownloadUrl } from '../../models_services/firebase_image_service';
 import { apiCreateSignal, apiGetSignal, apiUpdateSignal } from '../../models_services/firestore_signals_service';
 import { getSignalFormErrorStopLoss, getSignalFormErrorTakeProfit } from '../../utils/calculate_signal_form_error';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { authClient, firestoreClient } from '../../_firebase/firebase_client';
 import { calculateSignalPct } from '../../utils/calulate_signal_pct';
 import { calculateSignalPips } from '../../utils/calulate_signal_pips';
 import { calculatePctPips } from '../../utils/calulate_pct_pips';
@@ -32,17 +30,6 @@ interface IProps {
   market: markets;
   signal?: SignalModel | null;
   dbPath: string;
-}
-
-async function logToFirestore(message: string) {
-  try {
-    await addDoc(collection(firestoreClient, 'logs'), {
-      message: message,
-      timestamp: serverTimestamp()
-    });
-  } catch (error) {
-    console.error('Error writing log to Firestore: ', error);
-  }
 }
 
 export default function SignalForm({ id, market, dbPath }: IProps) {
@@ -178,8 +165,6 @@ function Form({ id, signal, market, dbPath }: IProps) {
     openCloseModal();
   }
 
-  
-
   const handleSubmit = async ({ sendNotification, isClosed }: HandleSubmitProps) => {
     console.log('form.values', form.values);
     console.log('form.errors', form.errors);
@@ -237,13 +222,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
 
       if (file) s.analysisImage = await getFirebaseStorageDownloadUrl({ file: file! });
 
-      await logToFirestore(`handleSubmit - dbPath: ${dbPath}`);
-
-
-      if (!signal) {
-
-        await apiCreateSignal({ signal: s, sendNotification, dbPath });
-      }
+      if (!signal) await apiCreateSignal({ signal: s, sendNotification, dbPath });
       if (signal && id) await apiUpdateSignal({ signal: s, sendNotification, dbPath, id, isClosed });
 
       setIsLoading(false);
