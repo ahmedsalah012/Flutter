@@ -53,16 +53,18 @@ export default function DashboardPage() {
               <DashboardCard title='Crypto Open:' value={dashboard.totalSignalsCryptoOpen} icon='tabler:coin-bitcoinp' />
               <DashboardCard title='Forex Open:' value={dashboard.totalSignalsForexOpen} icon='material-symbols:area-chart-outline-rounded' />
               <DashboardCard title='Stocks Open:' value={dashboard.totalSignalsStocksOpen} icon='material-symbols:insert-chart-rounded' />
+              <DashboardCard title='Global Open:' value={dashboard.totalSignalsGlobalOpen} icon='material-symbols:insert-chart-rounded' />
+              <DashboardCard title='OTC Open:' value={dashboard.totalSignalsOTCOpen} icon='material-symbols:insert-chart-rounded' />
+
             </div>
             <Text className='mt-5 text-lg font-semibold leading-10 cursor-pointer'>Closed Signals</Text>
             <div className='grid grid-cols-1 mt-0 md:grid-cols-3 gap-x-3 gap-y-3'>
               <DashboardCard title='Crypto Closed:' value={dashboard.totalSignalsCryptoClosed} icon='tabler:coin-bitcoin' />
-              <DashboardCard
-                title='Forex Closed:'
-                value={dashboard.totalSignalsForexClosed}
-                icon='material-symbols:area-chart-outline-rounded'
-              />
+              <DashboardCard title='Forex Closed:' value={dashboard.totalSignalsForexClosed} icon='material-symbols:area-chart-outline-rounded'/>
               <DashboardCard title='Stocks Closed:' value={dashboard.totalSignalsStocksClosed} icon='material-symbols:insert-chart-rounded' />
+              <DashboardCard title='Global Closed:' value={dashboard.totalSignalsGlobalClosed} icon='material-symbols:insert-chart-rounded' />
+              <DashboardCard title='OTC Closed:' value={dashboard.totalSignalsOTCClosed} icon='material-symbols:insert-chart-rounded' />
+
             </div>
           </Container>
         </Page>
