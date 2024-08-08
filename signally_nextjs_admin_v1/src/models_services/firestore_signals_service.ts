@@ -232,9 +232,7 @@ export async function apiSignalAggrPerfromance({ dbPath }: { dbPath: string }): 
       docPath = 'global';
       collectionPath = 'signalsAggrOpen2';
     }
-    
-    const fullPath = `${collectionPath}/${docPath}`;
-    console.log(`Writing data to Firestore path: ${fullPath}`);
+
 
     await setDoc(
       doc(firestoreClient, collectionPath, docPath),
