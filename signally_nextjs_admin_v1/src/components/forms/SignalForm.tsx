@@ -34,7 +34,7 @@ interface IProps {
   dbPath: string;
 }
 
-async function logToFirestore(message) {
+async function logToFirestore(message: string) {
   try {
     await addDoc(collection(firestoreClient, 'logs'), {
       message: message,
