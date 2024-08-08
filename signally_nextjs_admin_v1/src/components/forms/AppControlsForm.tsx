@@ -56,10 +56,12 @@ function Form({ appInfo }: IProps) {
     isEnableCryptoSignals: Yup.string().required('Required'),
     isEnableStocksSignals: Yup.string().required('Required'),
     isEnableGlobalSignals: Yup.string().required('Required'),
+    isEnableOTCSignals: Yup.string().required('Required'),
     isEnableForexNews: Yup.string().required('Required'),
     isEnableCryptoNews: Yup.string().required('Required'),
     isEnableStocksNews: Yup.string().required('Required'),
     isEnableGlobalNews: Yup.string().required('Required'),
+    isEnableOTCNews: Yup.string().required('Required'),
     isEnableFreeSignalsBOT: Yup.string().required('Required'),
     isEnableUnderMaintanance: Yup.string().required('Required'),
     CurrentAppVersion: Yup.string().required('Required'),
@@ -67,10 +69,12 @@ function Form({ appInfo }: IProps) {
     sortOrderCryptoSignals: Yup.number().required('Required'),
     sortOrderStocksSignals: Yup.number().required('Required'),
     sortOrderGlobalSignals: Yup.number().required('Required'),
+    sortOrderOTCSignals: Yup.number().required('Required'),
     headingNameCrypto: Yup.string().required('Required'),
     headingNameForex: Yup.string().required('Required'),
     headingNameStocks: Yup.string().required('Required'),
-    headingNameGlobal: Yup.string().required('Required')
+    headingNameGlobal: Yup.string().required('Required'),
+    headingNameOTC: Yup.string().required('Required')
   });
 
   const form = useForm({
@@ -84,10 +88,12 @@ function Form({ appInfo }: IProps) {
       isEnableCryptoSignals: getStringFromBool(appInfo?.isEnabledCryptoSignals ?? false),
       isEnableStocksSignals: getStringFromBool(appInfo?.isEnabledStocksSignals ?? false),
       isEnableGlobalSignals: getStringFromBool(appInfo?.isEnabledGlobalSignals ?? false),
+      isEnableOTCSignals: getStringFromBool(appInfo?.isEnabledOTCSignals ?? false),
       isEnableForexNews: getStringFromBool(appInfo?.isEnabledForexNews ?? false),
       isEnableCryptoNews: getStringFromBool(appInfo?.isEnabledCryptoNews ?? false),
       isEnableStocksNews: getStringFromBool(appInfo?.isEnabledStocksNews ?? false),
       isEnableGlobalNews: getStringFromBool(appInfo?.isEnabledGlobalNews ?? false),
+      isEnableOTCNews: getStringFromBool(appInfo?.isEnabledOTCNews ?? false),
       isEnableFreeSignalsBOT: getStringFromBool(appInfo?.isEnableFreeSignalsBOT ?? false),
       isEnableUnderMaintanance: getStringFromBool(appInfo?.isEnableUnderMaintanance ?? false),
       CurrentAppVersion: appInfo?.CurrentAppVersion ?? '',
@@ -95,10 +101,12 @@ function Form({ appInfo }: IProps) {
       sortOrderCryptoSignals: appInfo?.sortOrderCryptoSignals ?? 0,
       sortOrderStocksSignals: appInfo?.sortOrderStocksSignals ?? 0,
       sortOrderGlobalSignals: appInfo?.sortOrderGlobalSignals ?? 0,
+      sortOrderOTCSignals: appInfo?.sortOrderOTCSignals ?? 0,
       headingNameCrypto: appInfo?.headingNameCrypto ?? 'Crypto',
       headingNameForex: appInfo?.headingNameForex ?? 'Forex',
       headingNameStocks: appInfo?.headingNameStocks ?? 'Stocks',
-      headingNameGlobal: appInfo?.headingNameGlobal ?? 'Global Market'
+      headingNameGlobal: appInfo?.headingNameGlobal ?? 'Global Market',
+      headingNameOTC: appInfo?.headingNameOTC ?? 'OTC'
 
     }
   });
@@ -118,10 +126,12 @@ function Form({ appInfo }: IProps) {
       s.isEnabledCryptoSignals = getBoolFromString(form.values.isEnableCryptoSignals);
       s.isEnabledStocksSignals = getBoolFromString(form.values.isEnableStocksSignals);
       s.isEnabledGlobalSignals = getBoolFromString(form.values.isEnableGlobalSignals);
+      s.isEnabledOTCSignals = getBoolFromString(form.values.isEnableOTCSignals);
       s.isEnabledForexNews = getBoolFromString(form.values.isEnableForexNews);
       s.isEnabledCryptoNews = getBoolFromString(form.values.isEnableCryptoNews);
       s.isEnabledStocksNews = getBoolFromString(form.values.isEnableStocksNews);
       s.isEnabledGlobalNews = getBoolFromString(form.values.isEnableGlobalNews);
+      s.isEnabledOTCNews = getBoolFromString(form.values.isEnableOTCNews);
       s.isEnableFreeSignalsBOT = getBoolFromString(form.values.isEnableFreeSignalsBOT);
       s.isEnableUnderMaintanance = getBoolFromString(form.values.isEnableUnderMaintanance);
       s.CurrentAppVersion = form.values.CurrentAppVersion;
@@ -130,10 +140,13 @@ function Form({ appInfo }: IProps) {
       s.sortOrderCryptoSignals = Number(form.values.sortOrderCryptoSignals);
       s.sortOrderStocksSignals = Number(form.values.sortOrderStocksSignals);
       s.sortOrderGlobalSignals = Number(form.values.sortOrderGlobalSignals);
+      s.sortOrderOTCSignals = Number(form.values.sortOrderOTCSignals);
       s.headingNameCrypto = form.values.headingNameCrypto;
       s.headingNameForex = form.values.headingNameForex;
       s.headingNameStocks = form.values.headingNameStocks;
       s.headingNameGlobal = form.values.headingNameGlobal;
+      s.headingNameOTC = form.values.headingNameOTC;
+
 
 
       if (file) s.logoImage = await getFirebaseStorageDownloadUrl({ file: file! });
@@ -274,6 +287,16 @@ function Form({ appInfo }: IProps) {
               value={form.values.isEnableCryptoSignals}
               error={form.errors.isEnableCryptoSignals} />
 
+            <NativeSelect
+              className='w-full'
+              placeholder='Enable OTC'
+              label='Enable OTC'
+              data={['Yes', 'No']}
+              onChange={(e: any) => form.setFieldValue('isEnableOTCSignals', e.target.value)}
+              value={form.values.isEnableCryptoSignals}
+              error={form.errors.isEnableCryptoSignals} />
+
+
           </div>
 
           <div className='grid md:grid-cols-3 gap-x-3'>
@@ -283,10 +306,17 @@ function Form({ appInfo }: IProps) {
               label='Sort Order Global Market'
               {...form.getInputProps('sortOrderGlobalSignals')} />
 
+            <TextInput
+              className='w-full'
+              placeholder='Sort Order OTC'
+              label='Sort Order OTC'
+              {...form.getInputProps('sortOrderOTCSignals')} />
+
           </div>
 
           <div className='grid md:grid-cols-3 gap-x-3'>
             <TextInput className='w-full' placeholder='Heading Global Market' label='Heading Global Market' {...form.getInputProps('headingNameGlobal')} />
+            <TextInput className='w-full' placeholder='Heading OTC' label='Heading OTC' {...form.getInputProps('headingNameOTC')} />
           </div>
 
 
@@ -334,6 +364,16 @@ function Form({ appInfo }: IProps) {
               onChange={(e: any) => form.setFieldValue('isEnableGlobalNews', e.target.value)}
               value={form.values.isEnableGlobalNews}
               error={form.errors.isEnableGlobalNews}
+            />
+
+            <NativeSelect
+              className='w-full'
+              placeholder='Show OTC news'
+              label='Show OTC news'
+              data={['Yes', 'No']}
+              onChange={(e: any) => form.setFieldValue('isEnableOTCNews', e.target.value)}
+              value={form.values.isEnableOTCNews}
+              error={form.errors.isEnableOTCNews}
             />
 
             <NativeSelect
