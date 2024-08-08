@@ -222,7 +222,11 @@ function Form({ id, signal, market, dbPath }: IProps) {
 
       if (file) s.analysisImage = await getFirebaseStorageDownloadUrl({ file: file! });
 
+      console.log("handleSubmit - dbPath:", dbPath); // Add this line for logging
+
+
       if (!signal) await apiCreateSignal({ signal: s, sendNotification, dbPath });
+
       if (signal && id) await apiUpdateSignal({ signal: s, sendNotification, dbPath, id, isClosed });
 
       setIsLoading(false);
