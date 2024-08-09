@@ -9,6 +9,7 @@ export class SignalModel {
   @Expose() entryPrice: number = 0;
   @Expose() entryType: string = '';
   @Expose() isFree: boolean = false;
+  @Expose() platform: string = '';
   @Expose() analysisImage: string = '';
   @Expose() analysisText: string = '';
   @Expose() market: string = '';
