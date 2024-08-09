@@ -81,6 +81,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
     payout: Yup.string(),
     entrytime: Yup.date(),
     isFree: Yup.string().required('Required'),
+    platform: Yup.string().required('Required'),
     analysisImage: Yup.string(),
     analysisText: Yup.string(),
     //
@@ -131,6 +132,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
       entryPrice: signal?.entryPrice ?? '',
       entryDateTime: signal?.entryDateTime ?? new Date(),
       isFree: getStringFromBool(signal?.isFree ?? false),
+      platform: signal?.platform ?? 'default',
 
       stopLoss: signal?.stopLoss ?? '',
       stopLossPips: signal?.stopLossPips ?? '',
@@ -182,6 +184,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
       if (!id) s.isAuto = isAuto == 'true' ? true : false;
       s.market = market;
       s.entryType = form.values.entryType;
+      s.platform = form.values.platform;
       s.symbol = form.values.symbol;
       s.comment = form.values.comment;
       s.forecast = form.values.forecast;
@@ -396,6 +399,17 @@ function Form({ id, signal, market, dbPath }: IProps) {
           className='w-full'
           {...form.getInputProps('entryDateTime')}
           disabled={currentSignalIsAuto}
+        />
+
+        <NativeSelect
+          className='w-full'
+          disabled={currentSignalIsAuto}
+          placeholder='Default'
+          label='PlatForm'
+          data={['Quotex', 'Pocket','Olymp']}
+          onChange={(e: any) => form.setFieldValue('platform', e.target.value)}
+          value={form.values.platform}
+          error={form.errors.platform}
         />
       </div>
 
