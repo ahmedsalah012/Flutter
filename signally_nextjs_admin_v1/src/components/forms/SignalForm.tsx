@@ -406,7 +406,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
           disabled={currentSignalIsAuto}
           placeholder='Default'
           label='PlatForm'
-          data={['default', 'Quotex', 'Pocket', 'Olymp']}
+          data={['default', 'quotex', 'pocket', 'olymp']}
           onChange={(e: any) => form.setFieldValue('platform', e.target.value)}
           value={form.values.platform}
           error={form.errors.platform}
