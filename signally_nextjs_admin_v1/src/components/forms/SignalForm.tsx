@@ -403,7 +403,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
 
         <NativeSelect
           className='w-full'
-          disabled={currentSignalIsAuto}
+          disabled={symbolAggr.otc}
           placeholder='Default'
           label='PlatForm'
           data={['default', 'quotex', 'pocket', 'olymp']}
