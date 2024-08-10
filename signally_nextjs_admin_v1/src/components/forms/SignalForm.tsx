@@ -62,6 +62,8 @@ function Form({ id, signal, market, dbPath }: IProps) {
 
   const symbolAggr = useFirestoreStoreAdmin((state) => state.symbolAggr);
 
+  const isOTC = market === 'otc';
+
   function getSymbols() {
     if (market === 'forex') return symbolAggr.forex;
     if (market === 'crypto') return symbolAggr.crypto;
@@ -403,7 +405,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
 
         <NativeSelect
           className='w-full'
-          disabled={symbolAggr.otc}
+          disabled={!isOTC}
           placeholder='Default'
           label='PlatForm'
           data={['default', 'quotex', 'pocket', 'olymp']}
