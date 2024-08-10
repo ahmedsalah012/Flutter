@@ -12,7 +12,7 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
     const videoLessonsSnapshot = await getCountFromServer(collVideoLessons);
     const totalVideoLessons = videoLessonsSnapshot.data().count;
 
-     const collVideoLessonsAutocopy = query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'));
+    const collVideoLessonsAutocopy = query(collection(firestoreClient, 'videoLessons'), where('status', '==', 'autocopy'));
     const videoLessonsSnapshotAutocopy = await getCountFromServer(collVideoLessonsAutocopy);
     const totalVideoLessonsAutocopy = videoLessonsSnapshotAutocopy.data().count;
 
@@ -52,6 +52,14 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
     const signalsGlobalSnapshotClosed = await getCountFromServer(collSignalsGlobalClosed);
     const totalSignalsGlobalClosed = signalsGlobalSnapshotClosed.data().count;
 
+    const collSignalsOTCOpen = query(collection(firestoreClient, 'signalsOTC'), where('isClosed', '==', false));
+    const signalsOTCSnapshotOpen = await getCountFromServer(collSignalsOTCOpen);
+    const totalSignalsOTCOpen = signalsOTCSnapshotOpen.data().count;
+
+    const collSignalsOTCClosed = query(collection(firestoreClient, 'signalsOTC'), where('isClosed', '==', true));
+    const signalsOTCSnapshotClosed = await getCountFromServer(collSignalsOTCClosed);
+    const totalSignalsOTCClosed = signalsOTCSnapshotClosed.data().count;
+
     const collPosts = query(collection(firestoreClient, 'posts'));
     const postsSnapshot = await getCountFromServer(collPosts);
     const totalPosts = postsSnapshot.data().count;
@@ -69,6 +77,8 @@ export async function apiGetDashboardAggregation(): Promise<DashboardModel> {
       totalSignalsCryptoClosed,
       totalSignalsGlobalOpen,
       totalSignalsGlobalClosed,
+      totalSignalsOTCOpen,
+      totalSignalsOTCClosed,
       totalPosts
     });
   } catch (error) {
