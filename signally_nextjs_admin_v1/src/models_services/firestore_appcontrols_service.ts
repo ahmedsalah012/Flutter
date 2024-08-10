@@ -43,10 +43,18 @@ export async function apiUpdateAppControlsPublic(x: AppControlsPublicModel): Pro
       { merge: true }
     );
 
+    await setDoc(
+      doc(firestoreClient, 'signalsAggrOpen2', 'otc'),
+      { isEnabled: appControls.isEnabledOTCSignals, sort: appControls.sortOrderOTCSignals, name: appControls.headingNameOTC },
+      { merge: true }
+    );
+
     await setDoc(doc(firestoreClient, 'newsAggr', 'crypto'), { isEnabled: appControls.isEnabledCryptoNews }, { merge: true });
     await setDoc(doc(firestoreClient, 'newsAggr', 'forex'), { isEnabled: appControls.isEnabledForexNews }, { merge: true });
     await setDoc(doc(firestoreClient, 'newsAggr', 'stocks'), { isEnabled: appControls.isEnabledStocksNews }, { merge: true });
     await setDoc(doc(firestoreClient, 'newsAggr', 'global'), { isEnabled: appControls.isEnabledGlobalNews }, { merge: true });
+    await setDoc(doc(firestoreClient, 'newsAggr', 'otc'), { isEnabled: appControls.isEnabledOTCNews }, { merge: true });
+
 
 
     return true;
