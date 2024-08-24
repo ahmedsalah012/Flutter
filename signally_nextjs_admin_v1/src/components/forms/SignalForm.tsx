@@ -356,7 +356,7 @@ function Form({ id, signal, market, dbPath }: IProps) {
             disabled={currentSignalIsAuto}
             placeholder='----'
             label='Symbol'
-            data={['', ...getSymbols().map((s) => s.symbol)]}
+            data={['AUD/USD', ...getSymbols().map((s) => s.symbol)]}
             onChange={(e: any) => form.setFieldValue('symbol', e.target.value)}
             value={form.values.symbol}
             error={form.errors.symbol}
