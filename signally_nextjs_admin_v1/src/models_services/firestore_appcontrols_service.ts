@@ -12,7 +12,7 @@ export async function apiUpdateAppControlsPublic(x: AppControlsPublicModel): Pro
   delete appControls.apiWebSocketUrl;
 
   try {
-    const fbUser = authClient.currentUser;
+    const fbUser = authClient.currentUser; 
     const user = await apiGetUser(fbUser!.uid);
     if (!user) throw new Error('No user found!');
     if (!user.isSuperAdmin && !user.isAdmin) throw new Error('You are not authorized to update terms settings.');
